@@ -27,32 +27,25 @@ const handleShowAll = () => {
    loadAllPhones(true)
 }
 
-/*
-{
-    "brand": "Apple ",
-    "phone_name": "iPhone 13 mini",
-    "slug": "apple_iphone_13_mini-11104",
-    "image": "https://fdn2.gsmarena.com/vv/bigpic/apple-iphone-13-mini.jpg"
-
-*/
 const displayPhones = (phones) => {
     const phonesContainer = document.getElementById("phones-container");
-   phones.forEach(phone => {
+    phones.forEach(phone => {
+        const { brand, phone_name,slug, image } = phone;
        const div = document.createElement('div')
        div.className ="my-4"
        div.innerHTML = `
        <div class="card bg-base-100 w-96 shadow-xl">
   <figure class="px-10 pt-10">
     <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+      src=${image}
       alt="Shoes"
       class="rounded-xl" />
   </figure>
   <div class="card-body items-center text-center">
-    <h2 class="card-title">Shoes!</h2>
-    <p>If a dog chews shoes whose shoes does he choose?</p>
+    <h2 class="card-title">${brand}</h2>
+    <p>${phone_name}</p>
     <div class="card-actions">
-      <button class="btn btn-primary">Buy Now</button>
+      <button class="btn btn-primary">Show Details</button>
     </div>
   </div>
 </div>
@@ -61,4 +54,4 @@ console.log(phone);
        phonesContainer.appendChild(div)
    });
 }
-loadAllPhones();
+loadAllPhones(false,'iphone');
