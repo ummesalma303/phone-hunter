@@ -6,12 +6,12 @@ const loadAllPhones = async (status, brandName) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${brandName?brandName:brand}`);
   const data = await response.json();
   displayPhones(data.data, status)
-  // console.log(data.data);
-
 };
 
 const handleSearch = () => {
-    const searchBox = document.getElementById("search-box").value;
+  
+  const searchBox = document.getElementById("search-box").value;
+ 
   brand = searchBox;
   const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
@@ -25,27 +25,27 @@ const handleShowAll = () => {
 }
 
 const displayPhones = (phones, status) => {
+  //   const searchBox = document.getElementById("search-box").value;
     const phonesContainer = document.getElementById("phones-container");
-  document.getElementById("phones-container").innerHTML = "";
-
-  let displayPhones;
-  if (status) {
-    displayPhones = phones;
-   
-  } else {
-    
-    displayPhones=phones.slice(0,6)
-  }
+  const phone = document.getElementById("phones-container").innerHTML = "";
+  
+if (phones.length===0) {
+  document.getElementById("phones-container").innerHTML = `
+  <div class="text-yellow-500 font-bold my-5 text-2xl text-center">
+  <h2>No Phone Found.Please Try a New Search</h2>
+  </div>
+  `;
  
-  console.log(phones);
-  // const displayPhones= status?phones:phones.slice(0,6)
+  return
+}
+  const displayPhones= status?phones:phones.slice(0,6)
   
   displayPhones.forEach(phone => {
         const { brand, phone_name,slug, image } = phone;
        const div = document.createElement('div')
        div.className ="my-4"
        div.innerHTML = `
-       <div class="card bg-base-100 w-96 shadow-xl">
+       <div class="card bg-base-100  shadow-xl">
   <figure class="px-10 pt-10">
     <img
       src=${image}
@@ -75,9 +75,6 @@ const phoneDetails = async (slug) => {
 }
 const showDetails = (phone) => {
 
-
-
-console.log(phone);
 const { releaseDate, name, brand, image } = phone;
 const modalContainer = document.getElementById("modal-container");
 
