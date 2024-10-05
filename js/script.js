@@ -1,19 +1,18 @@
-const loadAllPhones = async (status,brandName) => {
+let brand = 'iphone';
+const loadAllPhones = async (status, brandName) => {
   const spinner = document.getElementById("spinner");
     spinner.style.display = "none";
 
-    const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${brandName?brandName:'iphone'}`);
-    const data = await response.json();
-    if (status) {
-         displayPhones(data.data);
-    } else {
-        displayPhones(data.data.slice(0, 6)); 
-    }
+    const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${brandName?brandName:brand}`);
+  const data = await response.json();
+  displayPhones(data.data, status)
+  // console.log(data.data);
+
 };
 
 const handleSearch = () => {
     const searchBox = document.getElementById("search-box").value;
-
+  brand = searchBox;
   const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
   setTimeout(() => {
@@ -25,11 +24,23 @@ const handleShowAll = () => {
    loadAllPhones(true)
 }
 
-const displayPhones = (phones) => {
+const displayPhones = (phones, status) => {
     const phonesContainer = document.getElementById("phones-container");
-    document.getElementById("phones-container").innerHTML = "";
+  document.getElementById("phones-container").innerHTML = "";
 
-    phones.forEach(phone => {
+  let displayPhones;
+  if (status) {
+    displayPhones = phones;
+   
+  } else {
+    
+    displayPhones=phones.slice(0,6)
+  }
+ 
+  console.log(phones);
+  // const displayPhones= status?phones:phones.slice(0,6)
+  
+  displayPhones.forEach(phone => {
         const { brand, phone_name,slug, image } = phone;
        const div = document.createElement('div')
        div.className ="my-4"
