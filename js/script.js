@@ -1,6 +1,6 @@
 const loadAllPhones = async (status,brandName) => {
-//   const spinner = document.getElementById("spinner");
-//     spinner.style.display = "none";
+  const spinner = document.getElementById("spinner");
+    spinner.style.display = "none";
 
     const response = await fetch(`https://openapi.programming-hero.com/api/phones?search=${brandName?brandName:'iphone'}`);
     const data = await response.json();
@@ -12,14 +12,13 @@ const loadAllPhones = async (status,brandName) => {
 };
 
 const handleSearch = () => {
+    const searchBox = document.getElementById("search-box").value;
+
   const spinner = document.getElementById("spinner");
     spinner.style.display = "block";
-
-    const searchBox = document.getElementById("search-box").value;
-    
   setTimeout(() => {
     loadAllPhones(false,searchBox);
-  }, 5000);
+  }, 3000);
 };
 
 const handleShowAll = () => {
