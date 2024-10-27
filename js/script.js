@@ -56,7 +56,7 @@ if (phones.length===0) {
     <h2 class="card-title">${brand}</h2>
     <p>${phone_name}</p>
     <div class="card-actions">
-      <button onclick="phoneDetails('${slug}')" class="btn btn-primary">Show Details</button>
+      <button onclick="phoneDetails('${slug}')" class="btn bg-green-300">Show Details</button>
     </div>
   </div>
 </div>
